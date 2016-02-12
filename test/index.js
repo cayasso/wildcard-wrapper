@@ -44,4 +44,18 @@ describe('verifyd-wildcard', function () {
     res.should.containEql('c:*', '*:*', '*:1');
   });
 
+  it('should return matches as full objects', function () {
+    var wild = wildcard();
+    wild.add('c:*');
+    wild.add('*:*');
+    wild.add('*:1');
+    var res = wild.match('c:1', true);
+    res.map(r => r.segs.should.containEql('c:1'));
+    res.map(r => r.key).should.containEql('c:*', '*:*', '*:1');
+
+    wild = wildcard();
+    wild.add('user:*');
+    wild.add('user:delete:*');
+  });
+
 });

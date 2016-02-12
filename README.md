@@ -37,6 +37,29 @@ console.log(keys);
 
 //-> ['user:*', 'user:delete:*']
 
+// or
+var res = api.wildcard.match('user:delete:123', true);
+console.log(res);
+
+/*
+//-> [
+  {
+    "key": "user:*",
+    "segs": [
+      "user:delete:123",
+      "delete:123"
+    ]
+  },
+  {
+    "key": "user:delete:*",
+    "segs": [
+      "user:delete:123",
+      "123"
+    ]
+  }
+]
+*/
+
 // remove
 api.wildcard.remove('user:*');
 console.log(api.wildcard.has('user:*'));
